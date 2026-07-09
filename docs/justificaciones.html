@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Justificaciones técnicas</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f4f6f8;
+      color: #1f2937;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.65;
+    }
+
+    main {
+      width: min(880px, calc(100% - 32px));
+      margin: 40px auto;
+      padding: 36px;
+      border: 1px solid #d8dee8;
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    h1 {
+      margin: 0 0 24px;
+      font-size: 2.2rem;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 1.2rem;
+    }
+
+    p {
+      margin: 0;
+      color: #374151;
+    }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #eef2f7;
+      color: #111827;
+      font-family: Consolas, Monaco, monospace;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      main {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Justificaciones técnicas</h1>
+
+    <section>
+      <h2>1. Atributo <code>pattern</code> en HTML frente a expresión regular en JavaScript</h2>
+      <p>
+        El atributo <code>pattern</code> permite declarar una regla de validación directamente en el marcado HTML. Esa regla se integra con la API de validación nativa del navegador y afecta propiedades como <code>validity.patternMismatch</code>, <code>checkValidity()</code> y el bloqueo del envío del formulario. En cambio, validar una expresión regular manualmente en JavaScript ofrece mayor control sobre la lógica, los casos especiales y el momento de ejecución, pero exige programar y mantener el flujo de error. En esta práctica se usa <code>pattern</code> para aprovechar la validación nativa y JavaScript para administrar mensajes, clases visuales y validaciones cruzadas.
+      </p>
+    </section>
+
+    <section>
+      <h2>2. Uso de <code>focusout</code> para mostrar errores por primera vez</h2>
+      <p>
+        Mostrar errores desde el primer evento <code>input</code> puede generar una experiencia agresiva, porque el usuario ve advertencias antes de terminar de escribir. El evento <code>focusout</code> permite esperar a que abandone el campo, momento en el que existe una intención más clara de haber completado ese dato. Por eso mejora la experiencia de usuario: se valida dinámicamente mientras escribe, pero los mensajes explícitos aparecen cuando el campo ya fue visitado y dejado.
+      </p>
+    </section>
+
+    <section>
+      <h2>3. Efecto de <code>setCustomValidity('')</code> en <code>validity.customError</code></h2>
+      <p>
+        <code>setCustomValidity()</code> permite definir un error personalizado sobre un campo del formulario. Cuando se pasa un texto, <code>validity.customError</code> queda en <code>true</code> y el campo se considera inválido aunque cumpla otros atributos HTML. Al ejecutar <code>setCustomValidity('')</code>, el mensaje personalizado se limpia, <code>validity.customError</code> vuelve a <code>false</code> y el navegador puede evaluar el resto de reglas nativas. Esto es clave en la confirmación de contraseña, porque el formulario solo debe enviarse cuando ambos valores coinciden.
+      </p>
+    </section>
+
+    <section>
+      <h2>4. Pila de funciones y validación recursiva en <code>submit</code></h2>
+      <p>
+        Si una función de validación se llama recursivamente dentro del evento <code>submit</code> sin una condición de salida clara, cada llamada queda apilada sobre la anterior en la pila de ejecución. Esto puede producir un crecimiento innecesario de llamadas y, en el peor caso, un desbordamiento de pila. En formularios, la validación debe ejecutarse de forma directa y finita: se revisan los campos, se actualiza la interfaz y se decide si se crea o no el objeto de datos.
+      </p>
+    </section>
+
+    <section>
+      <h2>5. Uso de <code>classList</code> frente a <code>element.style</code></h2>
+      <p>
+        Usar <code>classList.toggle</code>, <code>classList.add</code> y <code>classList.remove</code> separa la lógica de comportamiento de la presentación visual. JavaScript decide qué estado tiene el campo, mientras CSS define cómo se ve ese estado. Modificar <code>element.style</code> directamente mezcla responsabilidades, dificulta el mantenimiento y obliga a repetir reglas visuales en el código. Con clases reutilizables como <code>.input-error</code> e <code>.input-success</code>, el diseño se mantiene consistente y puede ajustarse desde una sola hoja de estilos.
+      </p>
+    </section>
+  </main>
+</body>
+</html>

@@ -121,9 +121,6 @@ function showFieldError(field) {
 }
 
 
-
-
-
 function clearFieldError(field) {
   const errorElement = getErrorElement(field);
 
