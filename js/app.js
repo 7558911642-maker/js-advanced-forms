@@ -120,6 +120,10 @@ function showFieldError(field) {
   errorElement.textContent = field.checkValidity() ? '' : getFieldErrorMessage(field);
 }
 
+
+
+
+
 function clearFieldError(field) {
   const errorElement = getErrorElement(field);
 
