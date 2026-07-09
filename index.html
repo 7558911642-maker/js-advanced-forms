@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validación avanzada de formularios y eventos DOM</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main class="page">
+    <section class="form-section" aria-labelledby="page-title">
+      <div class="intro">
+        <p class="eyebrow">Guía de laboratorio</p>
+        <h1 id="page-title">Validación avanzada de formularios y eventos DOM</h1>
+        <p class="description">
+          Registro con validación nativa de HTML5, eventos del DOM y mensajes accesibles.
+        </p>
+      </div>
+
+      <form id="registrationForm" class="registration-form" novalidate>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="fullName">Nombre completo</label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              autocomplete="name"
+              required
+              minlength="3"
+              aria-describedby="fullNameHelp fullNameError"
+            >
+            <small id="fullNameHelp" class="help-message">Escriba su nombre y apellido.</small>
+            <p id="fullNameError" class="error-message" aria-live="polite"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="username">Nombre de usuario</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              autocomplete="username"
+              required
+              minlength="4"
+              maxlength="15"
+              pattern="^[A-Za-z0-9_]{4,15}$"
+              aria-describedby="usernameHelp usernameError"
+            >
+            <small id="usernameHelp" class="help-message">Entre 4 y 15 caracteres: letras, números o guion bajo.</small>
+            <p id="usernameError" class="error-message" aria-live="polite"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              required
+              aria-describedby="emailHelp emailError"
+            >
+            <small id="emailHelp" class="help-message">Use un correo electrónico activo.</small>
+            <p id="emailError" class="error-message" aria-live="polite"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="birthDate">Fecha de nacimiento</label>
+            <input
+              type="date"
+              id="birthDate"
+              name="birthDate"
+              required
+              aria-describedby="birthDateHelp birthDateError"
+            >
+            <small id="birthDateHelp" class="help-message">Seleccione su fecha de nacimiento.</small>
+            <p id="birthDateError" class="error-message" aria-live="polite"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="country">País</label>
+            <select
+              id="country"
+              name="country"
+              required
+              aria-describedby="countryHelp countryError"
+            >
+              <option value="">Seleccione un país</option>
+              <option value="Argentina">Argentina</option>
+              <option value="Bolivia">Bolivia</option>
+              <option value="Chile">Chile</option>
+              <option value="Colombia">Colombia</option>
+              <option value="Ecuador">Ecuador</option>
+              <option value="México">México</option>
+              <option value="Perú">Perú</option>
+              <option value="Uruguay">Uruguay</option>
+            </select>
+            <small id="countryHelp" class="help-message">Elija el país asociado a su registro.</small>
+            <p id="countryError" class="error-message" aria-live="polite"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              autocomplete="new-password"
+              required
+              minlength="8"
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
+              aria-describedby="passwordHelp passwordError"
+            >
+            <small id="passwordHelp" class="help-message">Mínimo 8 caracteres, una mayúscula, una minúscula y un número.</small>
+            <p id="passwordError" class="error-message" aria-live="polite"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="confirmPassword">Confirmación de Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              autocomplete="new-password"
+              required
+              minlength="8"
+              aria-describedby="confirmPasswordHelp confirmPasswordError"
+            >
+            <small id="confirmPasswordHelp" class="help-message">Repita la contraseña exactamente igual.</small>
+            <p id="confirmPasswordError" class="error-message" aria-live="polite"></p>
+          </div>
+
+          <div class="form-field checkbox-field">
+            <div class="checkbox-row">
+              <input
+                type="checkbox"
+                id="terms"
+                name="terms"
+                required
+                aria-describedby="termsHelp termsError"
+              >
+              <label for="terms">Acepto los términos y condiciones</label>
+            </div>
+            <small id="termsHelp" class="help-message">Debe aceptar para completar el registro.</small>
+            <p id="termsError" class="error-message" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <div id="formStatus" class="form-status" aria-live="polite"></div>
+
+        <div class="form-actions">
+          <button type="reset" class="button button-secondary">Limpiar</button>
+          <button type="submit" class="button button-primary">Registrar</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
